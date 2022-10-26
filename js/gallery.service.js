@@ -13,7 +13,10 @@ var gImg4 = `./css/img/4.jpg`
 var gImg5 = `./css/img/5.jpg`
 var gImg6 = `./css/img/6.jpg`
 var gImg7 = `./css/img/7.jpg`
-const gImages = [gImg1, gImg2, gImg3, gImg4, gImg5, gImg6, gImg7]
+var gImg8 = `./css/img/8.jpg`
+var gImg9 = `./css/img/9.jpg`
+var gImg10 = `./css/img/10.jpg`
+const gImages = [gImg1, gImg2, gImg3, gImg4, gImg5, gImg6, gImg7, gImg8, gImg9, gImg10]
 
 
 _createImages()
@@ -27,7 +30,7 @@ function _createImages() {
 
     if (!Images || !Images.length) {
         Images = []
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 10; i++) {
             var genre = gGenre[i]
             var img = gImages[i]
             Images.push(_createImage(img))

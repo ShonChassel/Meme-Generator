@@ -14,6 +14,7 @@ var gIsLocalImg = false
 
 function onInit() {
     renderGallery()
+    elSearchBar.style.display = 'flex'
     elEditor.style.display = 'none'
     elGallery.style.display = 'grid'
     gCanvas = document.getElementById('meme-canvas')
@@ -59,8 +60,12 @@ function renderImg(imgUrl) {
         gCanvas.width = this.naturalWidth;
         gCanvas.height = this.naturalHeight;
         var currMeme = getMeme()
-        currMeme.lines[0].pos = { x: gCanvas.width / 2, y: 60 },
-            currMeme.lines[1].pos = { x: gCanvas.width / 2, y: gCanvas.height - 60 },
+        if ( currMeme.lines[0]){
+            currMeme.lines[0].pos = { x: gCanvas.width / 2, y: 60 }
+        }
+        if ( currMeme.lines[1]){
+            currMeme.lines[1].pos = { x: gCanvas.width / 2, y: gCanvas.height - 60 }
+        }
             gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
         drawMeme()
     };
@@ -74,7 +79,7 @@ function resizeCanvas() {
 
 
 
-//? ----------------input-Text---------------------
+//? ----------------input-Text-btns--------------------
 
 function drawText(text, x, y, colorTxt, colorFill, size, font, align ,isEdit) {
     gCtx.lineWidth = 2
@@ -132,5 +137,5 @@ function onAddLine(){
 function onDeleteLine(){
     deleteLine()
     // drawMeme()
-    // renderImg(getMeme().selectedImgUrl) // render all the text
+    renderImg(getMeme().selectedImgUrl) // render all the text
 }

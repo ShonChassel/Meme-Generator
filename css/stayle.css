@@ -32,6 +32,10 @@
   font-family: campangne;
   src: url(/css/font/Champagne\ &\ Limousines\ Bold.ttf);
 }
+@font-face {
+  font-family: GAMERIA;
+  src: url(/css/font/GAMERIA.ttf);
+}
 
 /*? BASICS */
 
@@ -107,11 +111,19 @@ img {
 .logo {
   font-size: 2.5rem;
   color: white;
-  font-family: Eurofurence-regular;
+  font-family: GAMERIA;
+  padding: 6px;
+  font-size: 73px;
 }
 
 .logo span {
   color: var(--clr-4);
+}
+
+.logo-text-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-header .main-nav li {
@@ -270,49 +282,56 @@ img {
   margin-top: 30px;
   display: grid;
   grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
     "btn-increase-text btn-decrease-text btn-align-to-left btn-center btn-align-to-right"
-    "select-font select-font select-font btn-paint-board btn-alight"
-    ;
+    "select-font select-font select-font btn-paint-board btn-save"
+    "btn-imugi btn-imugi btn-imugi . .";
   width: 80%;
   align-self: center;
   justify-items: end;
   gap: 30px;
 }
 
-.btn-increase-text{
+.btn-increase-text {
   grid-area: btn-increase-text;
 }
-.btn-decrease-text{
+.btn-decrease-text {
   grid-area: btn-decrease-text;
 }
-.btn-align-to-left{
+.btn-align-to-left {
   grid-area: btn-align-to-left;
 }
-.btn-center{
+.btn-center {
   grid-area: btn-center;
 }
-.btn-align-to-right{
+.btn-align-to-right {
   grid-area: btn-align-to-right;
 }
 
-.select-font{
+.select-font {
   border-radius: 5px;
-  font-weight:bolder ;
+  font-weight: bolder;
   font-size: larger;
   grid-area: select-font;
   width: 100%;
 }
-.btn-paint-board{
+
+.btn-paint-board {
   grid-area: btn-paint-board;
 }
-.btn-alight{
-  grid-area: btn-alight;
+.btn-save {
+  grid-area: btn-save;
 }
 
-.input-color{
+.input-color {
   cursor: pointer;
   position: absolute;
   opacity: 0;
+}
+
+.btn-imugi {
+  grid-area: btn-imugi;
+
+  width: 228px;
 }

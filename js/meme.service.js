@@ -123,7 +123,10 @@ function addLine() {
         isDrag: false
     }
     var currLineIdx = getCurrLineIdx()
-    gMeme.lines[currLineIdx].isEdit = false
+    if( gMeme.lines[currLineIdx]){
+        gMeme.lines[currLineIdx].isEdit = false
+
+    }
     gMeme.lines.push(newLine)
 }
 
@@ -131,5 +134,8 @@ function deleteLine(){
     var currLineIdx = getCurrLineIdx()
     console.log('currLineIdx',currLineIdx )
     gMeme.lines.splice(currLineIdx,1)
-    gMeme.lines[currLineIdx -1].isEdit = true
+    if(gMeme.lines[currLineIdx -1]){
+        gMeme.lines[currLineIdx -1].isEdit = true
+
+    }
 }

@@ -13,13 +13,15 @@
 
   <header class="main-header  full">
     <div class="header flex space-between align-center">
-      <div><img class="logo-img" src="css/img/logo.png" alt=""></div>
-      <div class="logo">Memes<span>.</span></div>
+      <div class="logo-text-img">
+        <div><img class="logo-img" src="css/img/logo.png" alt=""></div>
+        <div class="logo">Memes<span>.</span></div>
+      </div>
       <nav class="main-nav">
         <ul class="clean-list flex align-center justify-center">
           <li><a onclick="onInit()" class="active">Gallery</a></li>
-          <li><a href="#">Memes</a></li>
           <li><a href="#">Saves</a></li>
+          <li><a href="#">settings</a></li>
           <li><a href="#">About</a></li>
         </ul>
       </nav>
@@ -43,8 +45,8 @@
     <div class="meme-btns-container">
       <div class="input-container">
 
-        <input type="text" id="text" class="control-txt-input" value="" onkeyup="onChangeText(this.value)" title="Change Text"
-          data-trans="change-text" />
+        <input type="text" id="text" class="control-txt-input" value="" onkeyup="onChangeText(this.value)"
+          title="Change Text" data-trans="change-text" />
       </div>
 
       <div class="line-one">
@@ -84,21 +86,30 @@
 
         <select name="font-select" class="select-font" onchange="onSetFontText(this.value)">
           <option value="Ariel" selected>Ariel</option>
-          <option value="Eurofurence-regular" >Eurofurence regular</option>
+          <option value="Eurofurence-regular">Eurofurence regular</option>
           <option value="Lato-Bold">Lato Bold</option>
           <option value="campangne">campangne</option>
         </select>
 
-        <div class="btn-paint-board icon"  title="Delete Text" data-trans="delete-text">
+        <div class="btn-paint-board icon" title="Delete Text" data-trans="delete-text">
           <input type="color" class="input-color" onchange="onTxtColor(this.value)">
           <img src="css/icons/paint-board-and-brush.png" />
         </div>
-        
-        <div class="btn-alight icon" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
-          <img src="css/icons/align-to-right.png" />
+
+        <div class="btn-save icon" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
+          <img src="css/icons/save.png" />
         </div>
 
+
+        <div class="btn-imugi icon">
+          <img src="./css/imugi/1.png" alt="">
+          <img src="./css/imugi/2.png" alt="">
+          <img src="./css/imugi/3.png" alt="">
+          <img src="./css/imugi/4.png" alt="">
+        </div>
+        
       </div>
+
 
 
     </div>
