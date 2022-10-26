@@ -50,7 +50,7 @@ function _saveBooksToStorage() {
     saveToStorage(STORAGE_KEY, gImgs)
 }
 
-function getBookById(imageId) {
+function getImageById(imageId) {
     const image = gImgs.find(image => imageId === image.id)
     return image
 }

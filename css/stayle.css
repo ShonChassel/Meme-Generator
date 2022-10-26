@@ -175,10 +175,6 @@ img {
   display: flex;
   justify-content: center;
   margin-top: 237px;
-  display: grid;
-  grid-template-columns: 471px 471px;
-  grid-template-rows: 345px;
-  gap: 105px;
   margin-left: 178px;
 }
 
@@ -216,3 +212,6 @@ img {
 }
 
 /*? -------------------- ---------------------- */
+.canvas-container{
+  display: none;
+}

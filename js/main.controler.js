@@ -24,15 +24,21 @@ function renderImgs() {
 function renderImg(imageId) {
     var elMain = document.querySelector('.images-container')
     elMain.style.display = 'none'
-    var elSettings = document.querySelector('.settings-container')
-    elSettings.style.display = 'grid'
+    // var elSettings = document.querySelector('.canvas-container')
+    // elSettings.style.display = 'block'
 
-    var image = getBookById(imageId)
+    const canvas = document.getElementById("meme-canvas");
+    const ctx = canvas.getContext("2d");
+
+    var image = getImageById(imageId)
     console.log(image);
 
-    var  strHTML = `
+    var strHTML = `
     <img src="${image.url}" id="${image.id}" class="img-gallery-settings" />
         `
-   
+    image.addEventListener("load", (e) => {
+        ctx.drawImage(image, 33, 71, 104, 124, 21, 20, 87, 104);
+    });
+
     elSettings.innerHTML = strHTML
 }
