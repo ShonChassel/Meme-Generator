@@ -129,6 +129,7 @@ img {
   align-items: center;
   transition: box-shadow 0.4s;
   font-family: Lato-Regular;
+  cursor: pointer;
 }
 
 .clean-list {
@@ -171,7 +172,7 @@ img {
   cursor: pointer;
 }
 /*? -------------------- ---------------------- */
-.settings-container {
+.main-container-editor {
   display: flex;
   justify-content: center;
   margin-top: 237px;
@@ -214,4 +215,10 @@ img {
 /*? -------------------- ---------------------- */
 .canvas-container{
   display: none;
+}
+
+.meme-btns-container img{
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
 }

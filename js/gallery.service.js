@@ -6,7 +6,7 @@ var gImgs = []
 
 
 
-var gImg1 = `/css/img/1.jpg`
+var gImg1 = `./css/img/1.jpg`
 var gImg2 = `./css/img/2.jpg`
 var gImg3 = `./css/img/3.jpg`
 var gImg4 = `./css/img/4.jpg`
@@ -27,7 +27,7 @@ function _createImages() {
 
     if (!Images || !Images.length) {
         Images = []
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 4; i++) {
             var genre = gGenre[i]
             var img = gImages[i]
             Images.push(_createImage(img))
@@ -35,7 +35,7 @@ function _createImages() {
     }
     gImgs = Images
     console.log('gImages', gImgs)
-    _saveBooksToStorage()
+    _saveMemeToStorage()
 }
 
 function _createImage(img) {
@@ -46,13 +46,13 @@ function _createImage(img) {
     }
 }
 
-function _saveBooksToStorage() {
-    saveToStorage(STORAGE_KEY, gImgs)
-}
-
 function getImageById(imageId) {
     const image = gImgs.find(image => imageId === image.id)
+    console.log(image);
     return image
 }
 
 
+function _saveMemeToStorage() {
+    saveToStorage(STORAGE_KEY, gImgs)
+}

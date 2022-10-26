@@ -17,7 +17,7 @@
       <div class="logo">Memes<span>.</span></div>
       <nav class="main-nav">
         <ul class="clean-list flex align-center justify-center">
-          <li><a href="#" class="active">Gallery</a></li>
+          <li><a onclick="onInit()" class="active">Gallery</a></li>
           <li><a href="#">Memes</a></li>
           <li><a href="#">Saves</a></li>
           <li><a href="#">About</a></li>
@@ -25,14 +25,80 @@
       </nav>
     </div>
   </header>
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a name">
-  <main class="images-container grid"></main>
+  <input class="search-bar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..."
+    title="Type in a name">
+
+  <main class="gallery-container grid"></main>
 
 
-  <main class="settings-container">
+  <main class="main-container-editor">
     <canvas class="canvas-container" id="meme-canvas" height="500" width="500"
       style="border: 1px solid rgba(0, 0, 0, 0.199)"></canvas>
+
+
+    <div class="meme-btns-container">
+      <input type="text" class="control-txt-input" value="" onkeyup="onChangeText(this.value)" title="Change Text"
+        data-trans="change-text" />
+
+      <div class="line-one">
+        <div class="btn-switch-text" onclick="onSwitchLine()" title="Switch Text" data-trans="switch-text">
+          <img src="css/icons/up-and-down-opposite-double-arrows-side-by-side.png" />
+        </div>
+
+        <div class="btn-new-text" onclick="onAddLine()" title="Add New Text" data-trans="new-text">
+          <img src="css/icons/add.png" />
+        </div>
+
+        <div class="btn-delete-text" onclick="onDeleteLine()" title="Delete Text" data-trans="delete-text">
+          <img src="css/icons/trash.png" />
+        </div>
+      </div>
+
+      <div class="line-two">
+        <div class="btn-increasr-text" onclick="onSizeTxt('+')" title="increasr Text" data-trans="increasr-text">
+          <img src="css/icons/increase-font-icon.png" />
+        </div>
+
+        <div class="btn-decrease-text" onclick="onSizeTxt('-')" title="decrease Text" data-trans="decrease-text">
+          <img src="css/icons/decrease-font-icon.png" />
+        </div>
+
+        <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="alight-text">
+          <img src="css/icons/align-to-left.png" />
+        </div>
+
+        <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="alight-text">
+          <img src="css/icons/center-text-alignment.png" />
+        </div>
+
+        <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
+          <img src="css/icons/align-to-right.png" />
+        </div>
+      </div>
+
+<div class="line-three">
+
+  <select name="font-select">
+    <option value="first">First Value</option>
+    <option value="second" selected>Second Value</option>
+    <option value="third">Third Value</option>
+  </select>
+  <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
+    <img src="css/icons/paint-board-and-brush.png" />
+  </div>
+  <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
+    <img src="css/icons//align-to-right.png" />
+  </div>
+
+</div>
+
+
+    </div>
   </main>
+
+
+
+
 
   <script src="./js/storage.service.js"></script>
   <script src="./js/utils.js"></script>
