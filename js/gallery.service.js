@@ -27,7 +27,7 @@ function _createImages() {
 
     if (!Images || !Images.length) {
         Images = []
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 7; i++) {
             var genre = gGenre[i]
             var img = gImages[i]
             Images.push(_createImage(img))
@@ -51,7 +51,6 @@ function getImageById(imageId) {
     console.log(image);
     return image
 }
-
 
 function _saveMemeToStorage() {
     saveToStorage(STORAGE_KEY, gImgs)

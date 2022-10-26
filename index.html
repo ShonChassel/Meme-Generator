@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/stayle.css">
 </head>
 
-<body onload="onInit()" class="main-layout">
+<body onload="onInit()">
 
   <header class="main-header  full">
     <div class="header flex space-between align-center">
@@ -25,10 +25,14 @@
       </nav>
     </div>
   </header>
-  <input class="search-bar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..."
-    title="Type in a name">
 
-  <main class="gallery-container grid"></main>
+
+
+  <main class="gallery-container grid">
+    <input class="search-bar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..."
+      title="Type in a name">
+
+  </main>
 
 
   <main class="main-container-editor">
@@ -37,60 +41,64 @@
 
 
     <div class="meme-btns-container">
-      <input type="text" class="control-txt-input" value="" onkeyup="onChangeText(this.value)" title="Change Text"
-        data-trans="change-text" />
+      <div class="input-container">
+
+        <input type="text" id="text" class="control-txt-input" value="" onkeyup="onChangeText(this.value)" title="Change Text"
+          data-trans="change-text" />
+      </div>
 
       <div class="line-one">
-        <div class="btn-switch-text" onclick="onSwitchLine()" title="Switch Text" data-trans="switch-text">
+        <div class="btn-switch-text icon" onclick="onSwitchLine()" title="Switch Text" data-trans="switch-text">
           <img src="css/icons/up-and-down-opposite-double-arrows-side-by-side.png" />
         </div>
 
-        <div class="btn-new-text" onclick="onAddLine()" title="Add New Text" data-trans="new-text">
+        <div class="btn-new-text icon" onclick="onAddLine()" title="Add New Text" data-trans="new-text">
           <img src="css/icons/add.png" />
         </div>
 
-        <div class="btn-delete-text" onclick="onDeleteLine()" title="Delete Text" data-trans="delete-text">
+        <div class="btn-delete-text icon" onclick="onDeleteLine()" title="Delete Text" data-trans="delete-text">
           <img src="css/icons/trash.png" />
         </div>
       </div>
 
       <div class="line-two">
-        <div class="btn-increasr-text" onclick="onSizeTxt('+')" title="increasr Text" data-trans="increasr-text">
+        <div class="btn-increase-text icon" onclick="onSizeTxt('+')" title="increasr Text" data-trans="increasr-text">
           <img src="css/icons/increase-font-icon.png" />
         </div>
 
-        <div class="btn-decrease-text" onclick="onSizeTxt('-')" title="decrease Text" data-trans="decrease-text">
+        <div class="btn-decrease-text icon" onclick="onSizeTxt('-')" title="decrease Text" data-trans="decrease-text">
           <img src="css/icons/decrease-font-icon.png" />
         </div>
 
-        <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="alight-text">
+        <div class="btn-align-to-left icon" onclick="onTxtAlign('right')" title="Delete Text" data-trans="alight-text">
           <img src="css/icons/align-to-left.png" />
         </div>
 
-        <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="alight-text">
+        <div class="btn-center icon" onclick="onTxtAlign('center')" title="Delete Text" data-trans="alight-text">
           <img src="css/icons/center-text-alignment.png" />
         </div>
 
-        <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
+        <div class="btn-align-to-right icon" onclick="onTxtAlign('left')" title="Delete Text" data-trans="delete-text">
           <img src="css/icons/align-to-right.png" />
         </div>
+
+        <select name="font-select" class="select-font" onchange="onSetFontText(this.value)">
+          <option value="Ariel" selected>Ariel</option>
+          <option value="Eurofurence-regular" >Eurofurence regular</option>
+          <option value="Lato-Bold">Lato Bold</option>
+          <option value="campangne">campangne</option>
+        </select>
+
+        <div class="btn-paint-board icon"  title="Delete Text" data-trans="delete-text">
+          <input type="color" class="input-color" onchange="onTxtColor(this.value)">
+          <img src="css/icons/paint-board-and-brush.png" />
+        </div>
+        
+        <div class="btn-alight icon" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
+          <img src="css/icons/align-to-right.png" />
+        </div>
+
       </div>
-
-<div class="line-three">
-
-  <select name="font-select">
-    <option value="first">First Value</option>
-    <option value="second" selected>Second Value</option>
-    <option value="third">Third Value</option>
-  </select>
-  <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
-    <img src="css/icons/paint-board-and-brush.png" />
-  </div>
-  <div class="btn-alight-text" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
-    <img src="css/icons//align-to-right.png" />
-  </div>
-
-</div>
 
 
     </div>
