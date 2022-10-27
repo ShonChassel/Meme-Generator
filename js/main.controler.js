@@ -24,7 +24,7 @@ function onInit() {
     console.log(gMeme);
 }
 
-
+//? ----------------renders---------------------
 
 function renderGallery() {
 
@@ -76,8 +76,6 @@ function resizeCanvas() {
     gCanvas.width = elContainer.offsetWidth
     gCanvas.height = elContainer.offsetHeight
 }
-
-
 
 //? ----------------input-Text-btns--------------------
 
@@ -138,4 +136,10 @@ function onDeleteLine(){
     deleteLine()
     // drawMeme()
     renderImg(getMeme().selectedImgUrl) // render all the text
+}
+
+//? ----------------Download--btns--------------------
+
+function onDownload(){
+
 }

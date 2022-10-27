@@ -1,6 +1,6 @@
 'use strict'
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
-
+var gSavesMemes 
 
 
 var gMeme = {
@@ -42,7 +42,6 @@ function getMeme() {
 function getCurrLineIdx() {
     return gMeme.lines.findIndex((line) => { return line.isEdit })
 }
-
 
 function drawMeme() {
 

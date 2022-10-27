@@ -5,7 +5,6 @@ const gGenre = ['funny', 'funny', 'funny']
 var gImgs = []
 
 
-
 var gImg1 = `css/img/1.jpg`
 var gImg2 = `css/img/2.jpg`
 var gImg3 = `css/img/3.jpg`

@@ -163,8 +163,7 @@ img {
 
 .header img {
   margin-right: 0;
-  height: 100px;
-  background-color: #ffffff;
+  height: 120px;
   border-radius: 90px;
 }
 
@@ -274,7 +273,7 @@ img {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 39px;
+  gap: 36px;
   margin-top: 30px;
 }
 .line-two {
