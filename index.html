@@ -25,6 +25,7 @@
           <li><a href="#">settings</a></li>
         </ul>
       </nav>
+      <button type="button" class="btn-menu" onclick="toggleMenu()">☰</button>
     </div>
   </header>
 
@@ -38,8 +39,10 @@
 
 
   <main class="main-container-editor">
-    <canvas class="canvas-container" id="meme-canvas" height="500" width="500"
-      style="border: 1px solid rgba(0, 0, 0, 0.199)"></canvas>
+    
+      <canvas class="canvas-container" id="meme-canvas" height="500" width="500"
+        style="border: 1px solid rgba(0, 0, 0, 0.199)"></canvas>
+    
 
 
     <div class="meme-btns-container">
@@ -125,7 +128,11 @@
 
     </div>
   </main>
-
+<script>
+  function toggleMenu() {
+      document.body.classList.toggle('menu-open');
+    }
+</script>
   <script src="./js/storage.service.js"></script>
   <script src="./js/utils.js"></script>
   <script src="./js/main.controler.js"></script>

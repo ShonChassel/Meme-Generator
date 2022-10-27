@@ -21,7 +21,6 @@ function onInit() {
     gCtx = gCanvas.getContext('2d');
     // gCanvas.width = 500;
     // gCanvas.hight = 500;
-    console.log(gMeme);
 }
 
 //? ----------------renders---------------------
@@ -147,11 +146,9 @@ function onDeleteLine() {
 //? ----------------Download--btns--------------------
 
 function onDownloadImg(elLink) {
-    if (!noLineIsEdit(false)) return
-        renderCanvas(getMeme().selectedImgUrl) // render all the text
     const imgContent = gCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
-    noLineIsEdit(true)
+    
 }
 
 //? ----------------UploadImg--btns--------------------

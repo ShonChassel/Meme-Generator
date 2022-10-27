@@ -27,7 +27,7 @@ var gMeme = {
             colorTxt: 'red',
             font: 'Arial',
             colorFill: 'black',
-            pos: { x: 352 , y: 450   },
+            pos: { x: 335 , y: 393   },
             borderY: 10,
             isEdit: true,
             isDrag: false
@@ -139,6 +139,8 @@ function deleteLine() {
     }
 }
 
+// ?--------------------------for drag and drop--------------------
+
 function setMemeDrag(isDrag) {
     var currLineIdx = getCurrLineIdx()
     gMeme.lines[currLineIdx].isDrag = isDrag
@@ -166,9 +168,5 @@ function checkIsDrag() {
     if( line.isDrag)  return true})
 }
 
-function noLineIsEdit(){
-    var currLineIdx = getCurrLineIdx()
-    gMeme.lines[currLineIdx].isEdit = true
-    console.log('gMeme', gMeme)
-    return true
-}
+
+//? ---------------------------##########-------------------------------------

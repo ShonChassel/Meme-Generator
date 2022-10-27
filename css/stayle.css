@@ -4,6 +4,7 @@
   --clr-2: #ffffff;
   --clr-3: #292929;
   --clr-4: #ca942e;
+  --clr-5: #ffc107;
 
   /** BP */
   --l: 980px;
@@ -107,7 +108,9 @@ img {
 }
 
 /*?MAIN HEADER LOGO */
-
+.btn-menu {
+  display: none;
+}
 .logo {
   font-size: 2.5rem;
   color: white;
@@ -187,6 +190,7 @@ img {
 .main-container-editor {
   display: flex;
   justify-content: center;
+  flex-direction: row;
 }
 
 /*? -------------------- ---------------------- */
@@ -229,6 +233,7 @@ img {
 .canvas-container {
   display: none;
   border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 .meme-btns-container {
   width: 500px;
@@ -345,4 +350,57 @@ img {
 .file-input {
   opacity: 0;
   cursor: pointer;
+}
+
+/*? -------------------? FOR MOBILE ONLY---------------- */
+
+@media (max-width: 600px) {
+  .btn-menu {
+    display: block;
+    border-radius: 13px;
+    background-color: var(--clr-5);
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--clr-3);
+    height: 100vh;
+    border-inline-start: 1px solid #ccc;
+    box-shadow: -1px 20px 20px 9px;
+    min-width: 153px;
+    margin-top: 123px;
+    transform: translate(100%);
+    transition: transform 0.6s;
+  }
+  body.menu-open .main-nav {
+    transform: translate(0);
+  }
+  .main-header .main-nav a {
+    width: 154px;
+    height: 78px;
+  }
+  .main-nav ul {
+    flex-direction: column;
+  }
+
+  .main-nav li > ul {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+
+    background-color: var(--clr-3);
+    transition: transform 0.4s;
+  }
+
+  .main-nav li.drop-down:hover > ul {
+    transform: translate3d(-155px, 159px, 14px);
+  }
+
+  .main-container-editor {
+    flex-direction: column;
+  }
+
+
 }
