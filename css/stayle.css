@@ -34,7 +34,7 @@
 }
 @font-face {
   font-family: GAMERIA;
-  src: url('./font/GAMERIA.ttf');
+  src: url("./font/GAMERIA.ttf");
 }
 
 /*? BASICS */
@@ -333,4 +333,16 @@ img {
   grid-area: btn-imugi;
 
   width: 228px;
+}
+
+.btn-download {
+}
+.btn-upload {
+  background: url(./icons/upload2.png);
+  background-size: 50px;
+  cursor: pointer;
+}
+.file-input {
+  opacity: 0;
+  cursor: pointer;
 }

@@ -44,7 +44,8 @@ function renderMeme(imgId, imgUrl) {
     document.querySelector('.canvas-container').style.display = 'block'
     clearCanvas()   //? clear the canvas
     setSelectedImage(imgId, imgUrl) //? update the gMeme selectedImgId
-    renderImg(imgUrl)
+    addListeners()
+    renderCanvas(imgUrl)
     elEditor.style.display = 'flex'
     elGallery.style.display = 'none'
     elSearchBar.style.display = 'none'
@@ -52,7 +53,7 @@ function renderMeme(imgId, imgUrl) {
 
 //? ----------------CANVAS---------------------
 
-function renderImg(imgUrl) {
+function renderCanvas(imgUrl) {
     var memeImg = new Image(60, 45);
     memeImg.src = imgUrl;
 
@@ -60,13 +61,18 @@ function renderImg(imgUrl) {
         gCanvas.width = this.naturalWidth;
         gCanvas.height = this.naturalHeight;
         var currMeme = getMeme()
-        if ( currMeme.lines[0]){
-            currMeme.lines[0].pos = { x: gCanvas.width / 2, y: 60 }
+        console.log(checkIsDrag());
+        if (!checkIsDrag()) {
+
+            if (currMeme.lines[0]) {
+                currMeme.lines[0].pos = { x: gCanvas.width / 2, y: 60 }
+            }
+            if (currMeme.lines[1]) {
+                currMeme.lines[1].pos = { x: gCanvas.width / 2, y: gCanvas.height - 60 }
+            }
         }
-        if ( currMeme.lines[1]){
-            currMeme.lines[1].pos = { x: gCanvas.width / 2, y: gCanvas.height - 60 }
-        }
-            gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
+
+        gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
         drawMeme()
     };
 }
@@ -79,12 +85,12 @@ function resizeCanvas() {
 
 //? ----------------input-Text-btns--------------------
 
-function drawText(text, x, y, colorTxt, colorFill, size, font, align ,isEdit) {
+function drawText(text, x, y, colorTxt, colorFill, size, font, align, isEdit) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = colorTxt
     gCtx.fillStyle = colorFill
-    if(isEdit) gCtx.strokeRect(size ,y - size, gCanvas.width - size * 2, size + 10);
-    
+    if (isEdit) gCtx.strokeRect(size, y - size, gCanvas.width - size * 2, size + 10);
+
     gCtx.textAlign = align
     gCtx.font = size + 'px' + ' ' + font
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
@@ -98,48 +104,80 @@ function inputText(txt) {
 
 function onChangeText(txt) {
     updateTextMeme(txt)
-    renderImg(getMeme().selectedImgUrl) // render all the text
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
 function onSizeTxt(val) {
     updateSizeText(val)
-    renderImg(getMeme().selectedImgUrl) // render all the text
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
-function onTxtAlign(align){
-updateTxtAlign(align)
-renderImg(getMeme().selectedImgUrl) // render all the text
+function onTxtAlign(align) {
+    updateTxtAlign(align)
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
-function onSetFontText(font){
-updateTxtFont(font)
-renderImg(getMeme().selectedImgUrl) // render all the text
+function onSetFontText(font) {
+    updateTxtFont(font)
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
-function onTxtColor(color){
+function onTxtColor(color) {
     document.querySelector('.btn-paint-board').style.backgroundColor = color
-updateTxtColor(color)
-renderImg(getMeme().selectedImgUrl) // render all the text
+    updateTxtColor(color)
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
-function onSwitchLine(){
+function onSwitchLine() {
     updateSwitchLine()
-    renderImg(getMeme().selectedImgUrl) // render all the text
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
-function onAddLine(){
+function onAddLine() {
     addLine()
-    renderImg(getMeme().selectedImgUrl) // render all the text
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
-function onDeleteLine(){
+function onDeleteLine() {
     deleteLine()
     // drawMeme()
-    renderImg(getMeme().selectedImgUrl) // render all the text
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
 //? ----------------Download--btns--------------------
 
-function onDownload(){
+function onDownloadImg(elLink) {
+    if (!noLineIsEdit(false)) return
+        renderCanvas(getMeme().selectedImgUrl) // render all the text
+    const imgContent = gCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+    noLineIsEdit(true)
+}
 
+//? ----------------UploadImg--btns--------------------
+
+function onUploadImg(ev) {
+    console.log('ev', ev)
+    loadImageFromInput(ev, renderUploadImg)
+}
+
+// CallBack func will run on success load of the img
+function loadImageFromInput(ev, onImageReady) {
+    const reader = new FileReader()
+    // After we read the file
+    reader.onload = function (event) {
+        let img = new Image() // Create a new html img element
+        img.src = event.target.result // Set the img src to the img file we read
+        // Run the callBack func, To render the img on the canvas
+        img.onload = onImageReady.bind(null, img)
+        // Can also do it this way:
+        // img.onload = () => onImageReady(img)
+    }
+    reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
+}
+
+function renderUploadImg(img) {
+    // Draw the img on the canvas
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+    drawMeme()
 }

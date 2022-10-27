@@ -1,6 +1,6 @@
 'use strict'
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
-var gSavesMemes 
+var gSavesMemes
 
 
 var gMeme = {
@@ -14,7 +14,7 @@ var gMeme = {
             colorTxt: 'red',
             font: 'Arial',
             colorFill: 'black',
-            pos: { x: 400 / 2, y: 60 },
+            pos: { x: 361 , y: 68 },
             borderY: 10,
             isEdit: false,
             isDrag: false,
@@ -27,7 +27,7 @@ var gMeme = {
             colorTxt: 'red',
             font: 'Arial',
             colorFill: 'black',
-            pos: { x: 400 / 2, y: 60 },
+            pos: { x: 352 , y: 450   },
             borderY: 10,
             isEdit: true,
             isDrag: false
@@ -122,19 +122,53 @@ function addLine() {
         isDrag: false
     }
     var currLineIdx = getCurrLineIdx()
-    if( gMeme.lines[currLineIdx]){
+    if (gMeme.lines[currLineIdx]) {
         gMeme.lines[currLineIdx].isEdit = false
 
     }
     gMeme.lines.push(newLine)
 }
 
-function deleteLine(){
+function deleteLine() {
     var currLineIdx = getCurrLineIdx()
-    console.log('currLineIdx',currLineIdx )
-    gMeme.lines.splice(currLineIdx,1)
-    if(gMeme.lines[currLineIdx -1]){
-        gMeme.lines[currLineIdx -1].isEdit = true
+    console.log('currLineIdx', currLineIdx)
+    gMeme.lines.splice(currLineIdx, 1)
+    if (gMeme.lines[currLineIdx - 1]) {
+        gMeme.lines[currLineIdx - 1].isEdit = true
 
     }
+}
+
+function setMemeDrag(isDrag) {
+    var currLineIdx = getCurrLineIdx()
+    gMeme.lines[currLineIdx].isDrag = isDrag
+}
+
+function isMemeClicked(clickedPos) {
+    var currLineIdx = getCurrLineIdx()
+    var memePos = gMeme.lines[currLineIdx].pos
+    // Calc the distance between two dots
+    const distance = Math.sqrt((memePos.x - clickedPos.x) ** 2 + (memePos.y - clickedPos.y) ** 2)
+    //If its smaller then the radius of the circle we are inside
+    return distance <= gMeme.lines[currLineIdx].size
+}
+
+function moveMeneLine(dx, dy) {
+    var currLineIdx = getCurrLineIdx()
+    console.log(gMeme.lines[currLineIdx].pos);
+    gMeme.lines[currLineIdx].pos.x += dx
+    gMeme.lines[currLineIdx].pos.y += dy
+    console.log(gMeme.lines[currLineIdx].pos);
+}
+
+function checkIsDrag() {
+    return gMeme.lines.filter(line => { 
+    if( line.isDrag)  return true})
+}
+
+function noLineIsEdit(){
+    var currLineIdx = getCurrLineIdx()
+    gMeme.lines[currLineIdx].isEdit = true
+    console.log('gMeme', gMeme)
+    return true
 }

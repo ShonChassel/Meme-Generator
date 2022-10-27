@@ -21,8 +21,8 @@
         <ul class="clean-list flex align-center justify-center">
           <li><a onclick="onInit()" class="active">Gallery</a></li>
           <li><a href="#">Saves</a></li>
-          <li><a href="#">settings</a></li>
           <li><a href="#">About</a></li>
+          <li><a href="#">settings</a></li>
         </ul>
       </nav>
     </div>
@@ -107,12 +107,19 @@
           <img src="./css/imugi/4.png" alt="">
         </div>
 
-        <div class="btn-download icon" onclick="onDownload()" title="download" data-trans="download">
-          <img src="css/icons/download.png" />
+        <div class="btn-download icon">
+          <a href="#" download="my-img.jpg" class="" onclick="onDownloadImg(this)"><img
+              src="css/icons/download.png" /></a>
         </div>
 
-
+        <div class="btn-upload icon">
+          <input type="file" class="file-input" name="image" onchange="onUploadImg(event)" />
+        </div>
       </div>
+
+
+
+
 
 
 
@@ -124,6 +131,7 @@
   <script src="./js/main.controler.js"></script>
   <script src="./js/gallery.service.js"></script>
   <script src="./js/meme.service.js"></script>
+  <script src="./js/dragAndDrop.service.js"></script>
 
 </body>
 
