@@ -34,7 +34,7 @@
 }
 @font-face {
   font-family: GAMERIA;
-  src: url(css/font/GAMERIA.ttf);
+  src: url('./font/GAMERIA.ttf');
 }
 
 /*? BASICS */
