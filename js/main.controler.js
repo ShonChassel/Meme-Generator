@@ -3,6 +3,7 @@
 var elGallery = document.querySelector('.gallery-container')
 var elEditor = document.querySelector('.main-container-editor')
 var elSearchBar = document.querySelector('.search-bar')
+var elMemsSave = document.querySelector('.meme-save')
 
 // gCtx.measureText(txt).width // מחזיר את אורך השורה שהטקסט דורש
 
@@ -16,6 +17,7 @@ function onInit() {
     renderGallery()
     elSearchBar.style.display = 'flex'
     elEditor.style.display = 'none'
+    elMemsSave.style.display = 'none'
     elGallery.style.display = 'grid'
     gCanvas = document.getElementById('meme-canvas')
     gCtx = gCanvas.getContext('2d');
@@ -26,9 +28,13 @@ function onInit() {
 //? ----------------renders---------------------
 
 function renderGallery() {
+    console.log('currMeme', getMeme())
+    console.log('gSavesUrl', gSavesUrl)
+    elEditor.style.display = 'none'
+    elMemsSave.style.display = 'none'
+    elGallery.style.display = 'grid'
 
     var images = getImages()
-    console.log(images);
 
     var strHTML = '';
     images.forEach(img => {
@@ -41,18 +47,24 @@ function renderGallery() {
 
 function renderMeme(imgId, imgUrl) {
     document.querySelector('.canvas-container').style.display = 'block'
+
+    var meme = getNewMeme(imgId, imgUrl)
+    
     clearCanvas()   //? clear the canvas
-    setSelectedImage(imgId, imgUrl) //? update the gMeme selectedImgId
+    // setSelectedImage(imgId, imgUrl) //? update the gMeme selectedImgId
+
     addListeners()
-    renderCanvas(imgUrl)
+    renderCanvas(meme.selectedImgUrl)
     elEditor.style.display = 'flex'
     elGallery.style.display = 'none'
     elSearchBar.style.display = 'none'
+    
 }
 
 //? ----------------CANVAS---------------------
 
 function renderCanvas(imgUrl) {
+
     var memeImg = new Image(60, 45);
     memeImg.src = imgUrl;
 
@@ -60,7 +72,6 @@ function renderCanvas(imgUrl) {
         gCanvas.width = this.naturalWidth;
         gCanvas.height = this.naturalHeight;
         var currMeme = getMeme()
-        console.log(checkIsDrag());
         if (!checkIsDrag()) {
 
             if (currMeme.lines[0]) {
@@ -84,11 +95,13 @@ function resizeCanvas() {
 
 //? ----------------input-Text-btns--------------------
 
-function drawText(text, x, y, colorTxt, colorFill, size, font, align, isEdit) {
+function drawText(text, x, y, colorTxt, colorFill, size, font, align, isEdit, isDownload) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = colorTxt
     gCtx.fillStyle = colorFill
-    if (isEdit) gCtx.strokeRect(size, y - size, gCanvas.width - size * 2, size + 10);
+    if (!isDownload) {
+        if (isEdit) gCtx.strokeRect(size, y - size, gCanvas.width - size * 2, size + 10);
+    }
 
     gCtx.textAlign = align
     gCtx.font = size + 'px' + ' ' + font
@@ -96,6 +109,7 @@ function drawText(text, x, y, colorTxt, colorFill, size, font, align, isEdit) {
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
     setInputText()
 }
+
 
 function inputText(txt) {
     document.getElementById('text').value = txt
@@ -145,10 +159,15 @@ function onDeleteLine() {
 
 //? ----------------Download--btns--------------------
 
+
 function onDownloadImg(elLink) {
+    setDownloadImg(true, elLink, downloadImg)
+    downloadImg(elLink)
+}
+
+function downloadImg(elLink) {
     const imgContent = gCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
-    
 }
 
 //? ----------------UploadImg--btns--------------------
@@ -178,3 +197,43 @@ function renderUploadImg(img) {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
     drawMeme()
 }
+
+//? ----------------stickers--------------------
+
+
+
+//? ----------------Save--Meme--------------------
+function onSaveMeme() {
+    const imgContent = gCanvas.toDataURL('image/jpeg')
+    console.log('currMeme', getMeme())
+    console.log('gSavesUrl', gSavesUrl)
+    saveImgUrl(imgContent)
+
+
+    //!update the num on the heder
+    var saveCount = getSaveCount()
+    var elSaveCount = document.querySelector('.save-count')
+    elSaveCount.innerText = saveCount
+}
+
+function renderSavesMeme() {
+    elEditor.style.display = 'none'
+    elGallery.style.display = 'none'
+    elMemsSave.style.display = 'grid'
+
+    var memes = loadFromStorage(STORAGE_KEY_SAVE)
+    console.log('memes', memes)
+
+    var strHTML = '';
+    memes.forEach(meme => {
+        strHTML += `
+        <img src="${meme.imgSaveUrl}" id="${meme.selectedImgId}" class="img-gallery" onclick="renderMeme('${meme.selectedImgId}','${meme.selectedImgUrl}')" />
+        `
+
+    })
+
+    elMemsSave.innerHTML = strHTML
+}
+
+
+//? ----------------------------------------------

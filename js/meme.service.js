@@ -3,40 +3,66 @@ var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 var gSavesMemes
 
 
-var gMeme = {
-    selectedImgId: 1,
-    selectedImgUrl: '',
-    lines: [
-        {
-            txt: 'Im always eat Falafel',
-            size: 40,
-            align: 'center',
-            colorTxt: 'red',
-            font: 'Arial',
-            colorFill: 'black',
-            pos: { x: 361 , y: 68 },
-            borderY: 10,
-            isEdit: false,
-            isDrag: false,
-        },
+var gMeme 
 
-        {
-            txt: 'I love me',
-            size: 40,
-            align: 'center',
-            colorTxt: 'red',
-            font: 'Arial',
-            colorFill: 'black',
-            pos: { x: 335 , y: 393   },
-            borderY: 10,
-            isEdit: true,
-            isDrag: false
-        },
-    ]
-};
 
 function getMeme() {
     return gMeme
+    
+}
+
+function getNewMeme(imgId, imgUrl) {
+    var meme = loadFromStorage(imgId)
+
+    if (!meme || !meme.length) {
+        var newMeme = createMeme(imgId, imgUrl)
+        saveToStorage(imgId, newMeme)
+        gMeme = newMeme
+        console.log(gMeme);
+        return newMeme
+    } else {
+        gMeme = meme
+        console.log(gMeme);
+        return meme
+    }
+}
+
+function createMeme(imgId, imgUrl) {
+    return {
+        selectedImgId: imgId,
+        selectedImgUrl: imgUrl,
+        imgSaveUrl: '',
+        lines: [
+            {
+                txt: 'Im always eat Falafel',
+                size: 40,
+                align: 'center',
+                colorTxt: 'red',
+                font: 'Arial',
+                colorFill: 'black',
+                pos: { x: 361, y: 68 },
+                borderY: 10,
+                isEdit: false,
+                isDrag: false,
+                isDownload: false
+            },
+
+            {
+                txt: 'I love me',
+                size: 40,
+                align: 'center',
+                colorTxt: 'red',
+                font: 'Arial',
+                colorFill: 'black',
+                pos: { x: 335, y: 393 },
+                borderY: 10,
+                isEdit: true,
+                isDrag: false,
+                isDownload: false
+            },
+        ]
+    };
+
 }
 
 function getCurrLineIdx() {
@@ -46,10 +72,11 @@ function getCurrLineIdx() {
 function drawMeme() {
 
     gMeme.lines.forEach(line => {
-        drawText(line.txt, line.pos.x, line.pos.y, line.colorTxt, line.colorFill, line.size, line.font, line.align, line.isEdit)
+        drawText(line.txt, line.pos.x, line.pos.y, line.colorTxt, line.colorFill, line.size, line.font, line.align, line.isEdit, line.isDownload)
 
     })
 }
+
 
 function setInputText() {
     let txt = gMeme.lines[getCurrLineIdx()].txt
@@ -61,9 +88,10 @@ function clearCanvas() {
 }
 
 function setSelectedImage(imgId, imgUrl) {
-
+    console.log(gMeme);
     gMeme.selectedImgId = +imgId;
     gMeme.selectedImgUrl = imgUrl;
+    console.log(gMeme);
 
 }
 
@@ -164,9 +192,32 @@ function moveMeneLine(dx, dy) {
 }
 
 function checkIsDrag() {
-    return gMeme.lines.filter(line => { 
-    if( line.isDrag)  return true})
+    return gMeme.lines.filter(line => {
+        if (line.isDrag) return true
+    })
 }
 
 
-//? ---------------------------##########-------------------------------------
+//? ---------------------------imugy-------------------------------------
+
+function createNewLine(img) {
+    var newline = {
+        src: img,
+        size: 40,
+        pos: { x: 335, y: 393 },
+        isEdit: true,
+        isDrag: false
+    }
+    gMeme.lines.push(newline)
+    console.log(gMeme.lines);
+}
+
+//? ---------------------------download img-------------------------------------
+
+function setDownloadImg() {
+    var currLineIdx = getCurrLineIdx()
+    gMeme.lines[currLineIdx].isDownload = true
+    renderCanvas(getMeme().selectedImgUrl) // render all the text
+
+
+}

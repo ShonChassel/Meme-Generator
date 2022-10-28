@@ -3,7 +3,7 @@
   --CLR1: #606060;
   --clr-2: #ffffff;
   --clr-3: #292929;
-  --clr-4: #ca942e;
+  --clr-4: #ef7807;
   --clr-5: #ffc107;
 
   /** BP */
@@ -53,6 +53,7 @@ body {
   font-size: 1rem;
   width: 100%;
   height: 100%;
+  background-color: #fff1d9;
 }
 
 a {
@@ -102,21 +103,26 @@ img {
 /*? --------------------MAIN HEADER ---------------------- */
 
 .main-header {
-  background-color: var(--clr-3);
+  background-color: black;
+  box-shadow: -2px 3px 13px 0px;
   color: white;
-  box-shadow: inset 0px -6px 0 var(--clr4);
+  /* box-shadow: inset 0px -6px 0 var(--clr4); */
 }
 
 /*?MAIN HEADER LOGO */
 .btn-menu {
   display: none;
 }
+
+.none {
+  display: none;
+}
 .logo {
-  font-size: 2.5rem;
+  height: 90px;
   color: white;
   font-family: GAMERIA;
   padding: 6px;
-  font-size: 73px;
+  font-size: 65px;
 }
 
 .logo span {
@@ -139,8 +145,8 @@ img {
 
 .main-header .main-nav a {
   display: flex;
-  height: 130px;
-  width: 130px;
+  height: 90px;
+  width: 90px;
   justify-content: center;
   align-items: center;
   transition: box-shadow 0.4s;
@@ -155,8 +161,9 @@ img {
 }
 
 .main-header .main-nav a.active {
+  font-weight: bold;
   box-shadow: inset 0px -6px 0 var(--clr-4);
-  color: var(--clr-4);
+  color: #ef7807;
 }
 
 .main-header .main-nav a:hover {
@@ -166,7 +173,7 @@ img {
 
 .header img {
   margin-right: 0;
-  height: 120px;
+  height: 90px;
   border-radius: 90px;
 }
 
@@ -264,6 +271,8 @@ img {
   border-radius: 9px;
 }
 .icon {
+  color: #ef7807;
+  background-color: papayawhip;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -352,6 +361,20 @@ img {
   cursor: pointer;
 }
 
+
+.meme-save{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  grid-template-rows: repeat(auto-fill, 300px);
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.save-count{
+  color: brown;
+}
 /*? -------------------? FOR MOBILE ONLY---------------- */
 
 @media (max-width: 600px) {
@@ -359,6 +382,9 @@ img {
     display: block;
     border-radius: 13px;
     background-color: var(--clr-5);
+    height: 39px;
+    width: 36px;
+    font-weight: bold;
   }
 
   .main-nav {
@@ -402,5 +428,11 @@ img {
     flex-direction: column;
   }
 
-
+  .canvas-container {
+    height: 97%;
+    width: 97%;
+  }
+  .logo {
+    font-size: 50px;
+  }
 }

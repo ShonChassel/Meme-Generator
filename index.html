@@ -19,8 +19,8 @@
       </div>
       <nav class="main-nav">
         <ul class="clean-list flex align-center justify-center">
-          <li><a onclick="onInit()" class="active">Gallery</a></li>
-          <li><a href="#">Saves</a></li>
+          <li><a onclick="renderGallery()" class="active">Gallery</a></li>
+          <li><a onclick="renderSavesMeme()" href="#">Saves <span class="save-count">+</span></a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">settings</a></li>
         </ul>
@@ -99,15 +99,15 @@
           <img src="css/icons/paint-board-and-brush.png" />
         </div>
 
-        <div class="btn-save icon" onclick="onTxtAlight()" title="Delete Text" data-trans="delete-text">
+        <div class="btn-save icon" onclick="onSaveMeme()" title="Delete Text" data-trans="delete-text">
           <img src="css/icons/save.png" />
         </div>
 
-        <div class="btn-imugi icon">
-          <img src="./css/imugi/1.png" alt="">
-          <img src="./css/imugi/2.png" alt="">
-          <img src="./css/imugi/3.png" alt="">
-          <img src="./css/imugi/4.png" alt="">
+        <div class="stickers-div" title="Choose Stickers" data-trans="stickers " onclick="onChooseStickers()">
+          <!-- <div onclick="onChooseStickers(this.innerText)" class="stickers-item"><img src="css/imugi/1.png"></div>
+          <div onclick="onChooseStickers(this.innerText)" class="stickers-item"><img src="css/imugi/2.png"></div>
+          <div onclick="onChooseStickers(this.innerText)" class="stickers-item"><img src="css/imugi/3.png"></div>
+          <div onclick="onChooseStickers(this.innerText)" class="stickers-item"><img src="css/imugi/4.png"></div> -->
         </div>
 
         <div class="btn-download icon">
@@ -128,17 +128,20 @@
 
     </div>
   </main>
+  <section class="meme-save none"></section>
 <script>
   function toggleMenu() {
       document.body.classList.toggle('menu-open');
     }
 </script>
+<script src="./js/img.data.js"></script>
   <script src="./js/storage.service.js"></script>
   <script src="./js/utils.js"></script>
   <script src="./js/main.controler.js"></script>
   <script src="./js/gallery.service.js"></script>
   <script src="./js/meme.service.js"></script>
   <script src="./js/dragAndDrop.service.js"></script>
+  <script src="./js/save.service.js"></script>
 
 </body>
 
