@@ -20,5 +20,5 @@ var gImg17 = `./css/img/17.jpg`
 var gImg18 = `./css/img/18.jpg`
 var gImg19 = `./css/img/19.jpg`
 var gImg20 = `./css/img/20.jpg`
-var gImg21 = `./css/img/21.jpg`
+var gImg21 = `/css/img/21.jpg`
 const gImages = [gImg1, gImg2, gImg3, gImg4, gImg5, gImg6, gImg7, gImg8, gImg9, gImg10, gImg11, gImg12, gImg13, gImg14, gImg15, gImg16, gImg17, gImg18, gImg19, gImg20]
