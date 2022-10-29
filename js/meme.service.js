@@ -3,12 +3,94 @@ var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 var gSavesMemes
 
 
-var gMeme 
+var gMeme
 
+var gStickers = [{
+    id:'1',
+    url: 'css/imugi/1.png',
+    isDragging: false,
+    height: 85,
+    width: 85,
+    type: 'sticker',
+    txt: '',
+    size: 40,
+    align: 'center',
+    colorTxt: '',
+    font: '',
+    colorFill: '',
+    pos: { x: 100, y: 100 },
+    borderY: 10,
+    isEdit: false,
+    isDrag: false,
+    isDownload: false
+},
+{
+    id:'2',
+    url: 'css/imugi/2.png',
+    isDragging: false,
+    height: 85,
+    width: 85,
+    type: 'sticker',
+    txt: '',
+    size: 40,
+    align: 'center',
+    colorTxt: '',
+    font: '',
+    colorFill: '',
+    pos: { x: 100, y: 100 },
+    borderY: 10,
+    isEdit: false,
+    isDrag: false,
+    isDownload: false
+},
+{
+    id:'3',
+    url: 'css/imugi/3.png',
+    isDragging: false,
+    height: 85,
+    width: 85,
+    type: 'sticker',
+    txt: '',
+    size: 40,
+    align: 'center',
+    colorTxt: '',
+    font: '',
+    colorFill: '',
+    pos: { x: 100, y: 100 },
+    borderY: 10,
+    isEdit: false,
+    isDrag: false,
+    isDownload: false
+},
+{
+    id:'4',
+    url: 'css/imugi/4.png',
+    isDragging: false,
+    height: 85,
+    width: 85,
+    type: 'sticker',
+    txt: '',
+    size: 40,
+    align: 'center',
+    colorTxt: '',
+    font: '',
+    colorFill: '',
+    pos: { x: 100, y: 100 },
+    borderY: 10,
+    isEdit: false,
+    isDrag: false,
+    isDownload: false
+},
+
+]
+
+function getStickers() {
+    return gStickers
+}
 
 function getMeme() {
     return gMeme
-    
+
 }
 
 function getNewMeme(imgId, imgUrl) {
@@ -31,34 +113,39 @@ function createMeme(imgId, imgUrl) {
     return {
         selectedImgId: imgId,
         selectedImgUrl: imgUrl,
+        selectedStickerIdx: 0,
         imgSaveUrl: '',
         lines: [
             {
+                type: 'txt',
                 txt: 'Im always eat Falafel',
                 size: 40,
                 align: 'center',
-                colorTxt: 'red',
+                colorTxt: '#4b2a85e0',
                 font: 'Arial',
-                colorFill: 'black',
+                colorFill: 'white',
                 pos: { x: 361, y: 68 },
                 borderY: 10,
                 isEdit: false,
                 isDrag: false,
-                isDownload: false
+                isDownload: false,
+                url: ''
             },
 
             {
+                type: 'txt',
                 txt: 'I love me',
                 size: 40,
                 align: 'center',
-                colorTxt: 'red',
+                colorTxt: '#4b2a85e0',
                 font: 'Arial',
-                colorFill: 'black',
+                colorFill: 'white',
                 pos: { x: 335, y: 393 },
                 borderY: 10,
                 isEdit: true,
                 isDrag: false,
-                isDownload: false
+                isDownload: false,
+                url: ''
             },
         ]
     };
@@ -70,13 +157,18 @@ function getCurrLineIdx() {
 }
 
 function drawMeme() {
-
+    
     gMeme.lines.forEach(line => {
-        drawText(line.txt, line.pos.x, line.pos.y, line.colorTxt, line.colorFill, line.size, line.font, line.align, line.isEdit, line.isDownload)
+        if (line.type === 'txt') {
+            drawText(line.txt, line.pos.x, line.pos.y, line.colorTxt, line.colorFill, line.size, line.font, line.align, line.isEdit, line.isDownload)
+            return
+        } else if (line.type === 'sticker') {
+            drawSticker(line.url,line.id, line.pos.x, line.pos.y, line.size)
+            return
+        }
 
     })
 }
-
 
 function setInputText() {
     let txt = gMeme.lines[getCurrLineIdx()].txt
@@ -136,19 +228,24 @@ function updateSwitchLine() {
     gMeme.lines[nextIdx].isEdit = true
 }
 
-function addLine() {
+function addLine(type, url, id) {
     var newLine = {
+        type: type,
         txt: '',
-        size: 40,
+        url: url,
+        id:id,
+        size: 85,
         align: 'center',
-        colorTxt: 'blue',
+        colorTxt: '#4b2a85e0',
         font: 'Arial',
-        colorFill: 'black',
+        colorFill: 'white',
         pos: { x: gCanvas.width / 2, y: gCanvas.height / 2 },
         borderY: 10,
         isEdit: true,
         isDrag: false
     }
+
+
     var currLineIdx = getCurrLineIdx()
     if (gMeme.lines[currLineIdx]) {
         gMeme.lines[currLineIdx].isEdit = false
@@ -176,10 +273,15 @@ function setMemeDrag(isDrag) {
 
 function isMemeClicked(clickedPos) {
     var currLineIdx = getCurrLineIdx()
+    console.log(currLineIdx);
     var memePos = gMeme.lines[currLineIdx].pos
+    console.log(memePos);
     // Calc the distance between two dots
     const distance = Math.sqrt((memePos.x - clickedPos.x) ** 2 + (memePos.y - clickedPos.y) ** 2)
+    console.log(distance);
+    console.log(distance <= gMeme.lines[currLineIdx].size);
     //If its smaller then the radius of the circle we are inside
+    return true
     return distance <= gMeme.lines[currLineIdx].size
 }
 
@@ -221,3 +323,20 @@ function setDownloadImg() {
 
 
 }
+
+//? ---------------------------Stickers-------------------------------------
+
+function switchStickers(id) {
+    var focusSticker = gMeme.stickers.findIndex(sticker => sticker.id === id)
+    gMeme.selectedStickerIdx = focusSticker
+}
+
+function switchStickersDragDrop(idx) {
+    gMeme.selectedStickerIdx = idx
+}
+
+// function addSticker(sticker) {
+//     gMeme.stickers.push(sticker)
+//     gMeme.selectedStickerIdx = gMeme.stickers.length - 1
+// }
+

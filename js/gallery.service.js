@@ -15,7 +15,7 @@ function _createImages() {
 
     if (!Images || !Images.length) {
         Images = []
-        for (let i = 0; i < 17; i++) {
+        for (let i = 0; i < 20; i++) {
             var genre = gGenre[i]
             var img = gImages[i]
             Images.push(_createImage(img))

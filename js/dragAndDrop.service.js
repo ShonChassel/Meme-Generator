@@ -30,7 +30,10 @@ function onDown(ev) {
     console.log('Im from onDown')
     //Get the ev pos from mouse or touch
     const pos = getEvPos(ev)
+    console.log('kakiii');
+
     if (!isMemeClicked(pos)) return
+    console.log('fragggg');
     setMemeDrag(true)
     //Save the pos we start from 
     gStartPos = pos

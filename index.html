@@ -19,8 +19,8 @@
       </div>
       <nav class="main-nav">
         <ul class="clean-list flex align-center justify-center">
-          <li><a onclick="renderGallery()" class="active">Gallery</a></li>
-          <li><a onclick="renderSavesMeme()" href="#">Saves <span class="save-count">+</span></a></li>
+          <li><a onclick="renderGallery()" class="gallery active">Gallery</a></li>
+          <li><a onclick="renderSavesMeme()" href="#" class="save">Saves <span class="save-count"></span></a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">settings</a></li>
         </ul>
@@ -28,7 +28,6 @@
       <button type="button" class="btn-menu" onclick="toggleMenu()">☰</button>
     </div>
   </header>
-
 
 
   <main class="gallery-container grid">
@@ -39,10 +38,10 @@
 
 
   <main class="main-container-editor">
-    
-      <canvas class="canvas-container" id="meme-canvas" height="500" width="500"
-        style="border: 1px solid rgba(0, 0, 0, 0.199)"></canvas>
-    
+
+    <canvas class="canvas-container" id="meme-canvas" height="500" width="500"
+      style="border: 1px solid rgba(0, 0, 0, 0.199)"></canvas>
+
 
 
     <div class="meme-btns-container">
@@ -57,7 +56,7 @@
           <img src="css/icons/up-and-down-opposite-double-arrows-side-by-side.png" />
         </div>
 
-        <div class="btn-new-text icon" onclick="onAddLine()" title="Add New Text" data-trans="new-text">
+        <div class="btn-new-text icon" onclick="onAddLine('txt','','')" title="Add New Text" data-trans="new-text">
           <img src="css/icons/add.png" />
         </div>
 
@@ -103,7 +102,7 @@
           <img src="css/icons/save.png" />
         </div>
 
-        <div class="stickers-div" title="Choose Stickers" data-trans="stickers " onclick="onChooseStickers()">
+        <div class="stickers-div icon" title="Choose Stickers" data-trans="stickers ">
           <!-- <div onclick="onChooseStickers(this.innerText)" class="stickers-item"><img src="css/imugi/1.png"></div>
           <div onclick="onChooseStickers(this.innerText)" class="stickers-item"><img src="css/imugi/2.png"></div>
           <div onclick="onChooseStickers(this.innerText)" class="stickers-item"><img src="css/imugi/3.png"></div>
@@ -118,23 +117,26 @@
         <div class="btn-upload icon">
           <input type="file" class="file-input" name="image" onchange="onUploadImg(event)" />
         </div>
+
+        <div class="btn-upload icon" onclick="onShareToWhatsapp(this)">
+          <a id=waButton class="btn btn-success" href=""></a>
+        </div>
+
+
+
+
+
+
+
       </div>
-
-
-
-
-
-
-
-    </div>
   </main>
   <section class="meme-save none"></section>
-<script>
-  function toggleMenu() {
+  <script>
+    function toggleMenu() {
       document.body.classList.toggle('menu-open');
     }
-</script>
-<script src="./js/img.data.js"></script>
+  </script>
+  <script src="./js/img.data.js"></script>
   <script src="./js/storage.service.js"></script>
   <script src="./js/utils.js"></script>
   <script src="./js/main.controler.js"></script>

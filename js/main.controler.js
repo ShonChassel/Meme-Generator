@@ -1,5 +1,7 @@
 'use strict'
 
+var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
+
 var elGallery = document.querySelector('.gallery-container')
 var elEditor = document.querySelector('.main-container-editor')
 var elSearchBar = document.querySelector('.search-bar')
@@ -7,7 +9,7 @@ var elMemsSave = document.querySelector('.meme-save')
 
 // gCtx.measureText(txt).width // מחזיר את אורך השורה שהטקסט דורש
 
-
+var gFocusSticker = false
 var gCanvas
 var gCtx
 var gIsLocalImg = false
@@ -15,7 +17,7 @@ var gIsLocalImg = false
 
 function onInit() {
     renderGallery()
-    elSearchBar.style.display = 'flex'
+    // elSearchBar.style.display = 'flex'
     elEditor.style.display = 'none'
     elMemsSave.style.display = 'none'
     elGallery.style.display = 'grid'
@@ -28,8 +30,10 @@ function onInit() {
 //? ----------------renders---------------------
 
 function renderGallery() {
+    addClassActive('gallery')
     console.log('currMeme', getMeme())
     console.log('gSavesUrl', gSavesUrl)
+    elSearchBar.style.display = 'block'
     elEditor.style.display = 'none'
     elMemsSave.style.display = 'none'
     elGallery.style.display = 'grid'
@@ -49,16 +53,17 @@ function renderMeme(imgId, imgUrl) {
     document.querySelector('.canvas-container').style.display = 'block'
 
     var meme = getNewMeme(imgId, imgUrl)
-    
+
     clearCanvas()   //? clear the canvas
     // setSelectedImage(imgId, imgUrl) //? update the gMeme selectedImgId
-
+    onRenderStickers()
     addListeners()
     renderCanvas(meme.selectedImgUrl)
     elEditor.style.display = 'flex'
     elGallery.style.display = 'none'
     elSearchBar.style.display = 'none'
-    
+    elMemsSave.style.display = 'none'
+
 }
 
 //? ----------------CANVAS---------------------
@@ -67,7 +72,6 @@ function renderCanvas(imgUrl) {
 
     var memeImg = new Image(60, 45);
     memeImg.src = imgUrl;
-
     memeImg.onload = function () {  // Draw the img on the canvas
         gCanvas.width = this.naturalWidth;
         gCanvas.height = this.naturalHeight;
@@ -84,6 +88,7 @@ function renderCanvas(imgUrl) {
 
         gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
         drawMeme()
+
     };
 }
 
@@ -146,8 +151,9 @@ function onSwitchLine() {
     renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
-function onAddLine() {
-    addLine()
+function onAddLine(type, url, id) {
+    console.log(type);
+    addLine(type, url,id)
     renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
@@ -201,12 +207,27 @@ function renderUploadImg(img) {
 //? ----------------stickers--------------------
 
 
+function onRenderStickers() {
+    var stickers = getStickers()
+
+    var strHtml = ''
+    stickers.forEach(sticker => {
+        strHtml += `<img src="${sticker.url}" class="sticker" id="sticker-num-${sticker.id}" onclick="onAddLine(\'${'sticker'}\',\'${sticker.url}\',\'${sticker.id}\')">`
+    })
+    document.querySelector('.stickers-div').innerHTML = strHtml
+
+}
+
+function drawSticker(url,id, positionX, positionY, size) {
+    var elSticker = document.querySelector(`#sticker-num-${id}`)
+    console.log(elSticker);
+    gCtx.drawImage(elSticker, positionX, positionY,size,size)
+}
+
 
 //? ----------------Save--Meme--------------------
 function onSaveMeme() {
     const imgContent = gCanvas.toDataURL('image/jpeg')
-    console.log('currMeme', getMeme())
-    console.log('gSavesUrl', gSavesUrl)
     saveImgUrl(imgContent)
 
 
@@ -217,6 +238,8 @@ function onSaveMeme() {
 }
 
 function renderSavesMeme() {
+    addClassActive('save')
+    elSearchBar.style.display = 'none'
     elEditor.style.display = 'none'
     elGallery.style.display = 'none'
     elMemsSave.style.display = 'grid'
@@ -237,3 +260,28 @@ function renderSavesMeme() {
 
 
 //? ----------------------------------------------
+
+function addClassActive(val){
+ var  elGallery = document.querySelector('.gallery')
+ var elSave =  document.querySelector('.save')
+
+    switch (val) {
+        case 'gallery':
+            elGallery.classList.add('active');
+            elSave.classList.remove('active');
+            break;
+        case 'save':
+            elSave.classList.add('active');
+            elGallery.classList.remove('active');
+            break;
+    }
+}
+
+function onShareToWhatsapp(elLink){
+    console.log(elLink);
+    const imgContent = gCanvas.toDataURL('image/jpeg')
+  
+
+    const button = document.getElementById('waButton');
+    button.setAttribute('href', 'whatsapp://send?text='+encodeURIComponent(imgContent));
+}
