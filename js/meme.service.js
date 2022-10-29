@@ -8,7 +8,6 @@ var gMeme
 var gStickers = [{
     id:'1',
     url: 'css/imugi/1.png',
-    isDragging: false,
     height: 85,
     width: 85,
     type: 'sticker',
@@ -27,7 +26,6 @@ var gStickers = [{
 {
     id:'2',
     url: 'css/imugi/2.png',
-    isDragging: false,
     height: 85,
     width: 85,
     type: 'sticker',
@@ -46,7 +44,6 @@ var gStickers = [{
 {
     id:'3',
     url: 'css/imugi/3.png',
-    isDragging: false,
     height: 85,
     width: 85,
     type: 'sticker',
@@ -65,7 +62,6 @@ var gStickers = [{
 {
     id:'4',
     url: 'css/imugi/4.png',
-    isDragging: false,
     height: 85,
     width: 85,
     type: 'sticker',
