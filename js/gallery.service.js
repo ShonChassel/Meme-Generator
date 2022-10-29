@@ -15,9 +15,9 @@ function _createImages() {
 
     if (!Images || !Images.length) {
         Images = []
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 28; i++) {
             var genre = gGenre[i]
-            var img = gImages[i]
+            var img = crateImages()[i]
             Images.push(_createImage(img))
         }
     }

@@ -91,8 +91,8 @@ function getMeme() {
 
 function getNewMeme(imgId, imgUrl) {
     var meme = loadFromStorage(imgId)
-
-    if (!meme || !meme.length) {
+console.log(meme);
+    if (!meme) {
         var newMeme = createMeme(imgId, imgUrl)
         saveToStorage(imgId, newMeme)
         gMeme = newMeme

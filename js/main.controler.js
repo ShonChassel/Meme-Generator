@@ -66,6 +66,7 @@ function renderMeme(imgId, imgUrl) {
 
 }
 
+
 //? ----------------CANVAS---------------------
 
 function renderCanvas(imgUrl) {
@@ -249,8 +250,9 @@ function renderSavesMeme() {
 
     var strHTML = '';
     memes.forEach(meme => {
+        console.log(meme);
         strHTML += `
-        <img src="${meme.imgSaveUrl}" id="${meme.selectedImgId}" class="img-gallery" onclick="renderMeme('${meme.selectedImgId}','${meme.selectedImgUrl}')" />
+        <img src="${meme.imgSaveUrl}" id="${meme.selectedImgId}" class="img-gallery" onclick="renderMemeSaves('${meme.selectedImgId}','${meme.selectedImgUrl}' )" />
         `
 
     })
@@ -258,6 +260,23 @@ function renderSavesMeme() {
     elMemsSave.innerHTML = strHTML
 }
 
+function renderMemeSaves(id,url) {
+    document.querySelector('.canvas-container').style.display = 'block'
+    // var meme = loadFromStorage(id)
+    // console.log(meme);
+    var meme = getNewMeme(id, url)
+
+    clearCanvas()   //? clear the canvas
+    // setSelectedImage(imgId, imgUrl) //? update the gMeme selectedImgId
+    onRenderStickers()
+    addListeners()
+    renderCanvas(meme.selectedImgUrl)
+    elEditor.style.display = 'flex'
+    elGallery.style.display = 'none'
+    elSearchBar.style.display = 'none'
+    elMemsSave.style.display = 'none'
+
+}
 
 //? ----------------------------------------------
 
