@@ -1,5 +1,4 @@
 'use strict'
-var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 var gSavesMemes
 
 
@@ -130,7 +129,7 @@ function createMeme(imgId, imgUrl) {
 
             {
                 type: 'txt',
-                txt: 'I love me',
+                txt: 'I love js',
                 size: 40,
                 align: 'center',
                 colorTxt: '#4b2a85e0',

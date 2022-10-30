@@ -15,13 +15,13 @@
   <header class="main-header  full">
     <div class="header flex space-between align-center">
       <div class="logo-text-img">
-        <div><img class="logo-img" src="css/img/logo.png" alt=""></div>
+        <!-- <div><img class="logo-img" src="css/img/logo.png" alt=""></div> -->
         <div class="logo">Memes<span>.</span></div>
       </div>
       <nav class="main-nav">
         <ul class="clean-list flex align-center justify-center">
           <li><a onclick="renderGallery()" class="gallery active">Gallery</a></li>
-          <li><a onclick="renderSavesMeme()" href="#" class="save">Saves <span class="save-count"></span></a></li>
+          <li><a onclick="renderSavesMeme()" href="#" class="save">Saved <span class="save-count"></span></a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">settings</a></li>
         </ul>
@@ -30,12 +30,18 @@
     </div>
   </header>
 
+  <div class="search-container">
+    <input class="search-bar" type="text" id="myInput" onkeyup="onSetFilterByTxt(this.value)" placeholder=" Search...">
+    <div class="search-words"></div>
+  </div>
 
-  <main class="gallery-container grid">
-    <input class="search-bar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..."
-      title="Type in a name">
+<!-- <section>
+  <h1>get your meme up</h1>
+  <button class="section-btn" onclick="onUploadImg(event)">+<input type="file" onchange="onUploadImg(event)"/></button>
+  <input type="file" style="opacity:0;" onchange="onUploadImg(event)"  />
+</section> -->
 
-  </main>
+  <main class="gallery-container grid"></main>
 
 
   <main class="main-container-editor">
@@ -123,14 +129,24 @@
           <a id=waButton class="btn btn-success" href=""><img src="/css/icons/whatsapp.png" alt=""></a>
         </div>
 
-
-
-
-
-
-
       </div>
   </main>
+
+  <!-- <nav role="navigation">
+    <div id="menuToggle">
+      <input type="checkbox" />
+      <span></span>
+      <span></span>
+      <span></span>
+    <ul id="menu">
+      <a href="#"><li>Home</li></a>
+      <a href="#"><li>About</li></a>
+      <a href="#"><li>Info</li></a>
+      <a href="#"><li>Contact</li></a>
+    </ul>
+  </div>
+</nav> -->
+
   <section class="meme-save none"></section>
   <script>
     function toggleMenu() {

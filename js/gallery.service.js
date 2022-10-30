@@ -2,14 +2,28 @@
 const STORAGE_KEY = 'Images'
 const gGenre = ['funny', 'funny', 'funny']
 
-var gImgs = []
+var gKeywordSearchCountMap = { 'funny': 20, 'trump': 35, 'baby': 12,}
 
-_createImages()
+var gImgs = getImgs()
 
-function getImages() {
-    return gImgs
+var gFilterBy = {
+    txt: '',
 }
 
+function getImages() {
+    var imgs = gImgs
+    _saveMemeToStorage()
+
+    if (gFilterBy.txt) {
+        return imgs.filter(img => img.keywords.some(word => word.toLowerCase().includes(gFilterBy.txt.toLowerCase())))
+
+    } else {
+        return imgs
+    }
+
+}
+
+//!-----------not in use now
 function _createImages() {
     var Images = loadFromStorage(STORAGE_KEY)
 
@@ -32,11 +46,29 @@ function _createImage(img) {
         keywords: ['funny']
     }
 }
+//!-------------------------
 
 function getImageById(imageId) {
     const image = gImgs.find(image => imageId === image.id)
     console.log(image);
     return image
+}
+
+//!-------------------------
+function setFilterByTxt(txt) {
+    gFilterBy.txt = txt
+}
+
+function updateSizeWord(key, size) {
+    console.log('key, size',key, size);
+
+    console.log( gKeywordSearchCountMap[key]);
+    gKeywordSearchCountMap[key] += size
+    console.log( gKeywordSearchCountMap);
+}
+
+function getKeywordSearchCount() {
+    return gKeywordSearchCountMap
 }
 
 function _saveMemeToStorage() {

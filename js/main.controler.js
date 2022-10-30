@@ -1,10 +1,9 @@
 'use strict'
 
-var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 var elGallery = document.querySelector('.gallery-container')
 var elEditor = document.querySelector('.main-container-editor')
-var elSearchBar = document.querySelector('.search-bar')
+var elSearchBar = document.querySelector('.search-container')
 var elMemsSave = document.querySelector('.meme-save')
 
 // gCtx.measureText(txt).width // מחזיר את אורך השורה שהטקסט דורש
@@ -31,9 +30,9 @@ function onInit() {
 
 function renderGallery() {
     addClassActive('gallery')
-    console.log('currMeme', getMeme())
-    console.log('gSavesUrl', gSavesUrl)
-    elSearchBar.style.display = 'block'
+    renderKeyWord()
+
+    elSearchBar.style.display = 'flex'
     elEditor.style.display = 'none'
     elMemsSave.style.display = 'none'
     elGallery.style.display = 'grid'
@@ -154,7 +153,7 @@ function onSwitchLine() {
 
 function onAddLine(type, url, id) {
     console.log(type);
-    addLine(type, url,id)
+    addLine(type, url, id)
     renderCanvas(getMeme().selectedImgUrl) // render all the text
 }
 
@@ -219,10 +218,10 @@ function onRenderStickers() {
 
 }
 
-function drawSticker(url,id, positionX, positionY, size) {
+function drawSticker(url, id, positionX, positionY, size) {
     var elSticker = document.querySelector(`#sticker-num-${id}`)
     console.log(elSticker);
-    gCtx.drawImage(elSticker, positionX, positionY,size,size)
+    gCtx.drawImage(elSticker, positionX, positionY, size, size)
 }
 
 
@@ -243,6 +242,7 @@ function renderSavesMeme() {
     elSearchBar.style.display = 'none'
     elEditor.style.display = 'none'
     elGallery.style.display = 'none'
+    elSearchBar.style.display = 'none'
     elMemsSave.style.display = 'grid'
 
     var memes = loadFromStorage(STORAGE_KEY_SAVE)
@@ -260,7 +260,7 @@ function renderSavesMeme() {
     elMemsSave.innerHTML = strHTML
 }
 
-function renderMemeSaves(id,url) {
+function renderMemeSaves(id, url) {
     document.querySelector('.canvas-container').style.display = 'block'
     // var meme = loadFromStorage(id)
     // console.log(meme);
@@ -280,9 +280,9 @@ function renderMemeSaves(id,url) {
 
 //? ----------------------------------------------
 
-function addClassActive(val){
- var  elGallery = document.querySelector('.gallery')
- var elSave =  document.querySelector('.save')
+function addClassActive(val) {
+    var elGallery = document.querySelector('.gallery')
+    var elSave = document.querySelector('.save')
 
     switch (val) {
         case 'gallery':
@@ -296,11 +296,61 @@ function addClassActive(val){
     }
 }
 
-function onShareToWhatsapp(elLink){
+function onShareToWhatsapp(elLink) {
     console.log(elLink);
     const imgContent = gCanvas.toDataURL('image/jpeg')
-  
+
 
     const button = document.getElementById('waButton');
-    button.setAttribute('href', 'whatsapp://send?text='+encodeURIComponent(imgContent));
+    button.setAttribute('href', 'whatsapp://send?text=' + encodeURIComponent(imgContent));
+}
+
+//? ------------------------search-bar----------------------
+
+function onSetFilterByTxt(txt) {
+    console.log('Filtering by txt', txt)
+    console.log('gImgs', gImgs)
+    setFilterByTxt(txt)
+    renderGallery()
+}
+
+
+
+function onSetFilterByWord(txt) {
+    // var txt = ev.innerText
+    setFilterByTxt(txt)
+console.log(txt);
+    switch (txt) {
+        case 'Funny':
+            updateSizeWord('funny', 5)
+            renderGallery()
+            break;
+        case 'Trump':
+            updateSizeWord('trump', 5)
+            renderGallery()
+            break;
+        case 'Baby':
+            updateSizeWord('baby', 5)
+            renderGallery()
+            break;
+    }
+}
+
+// function setWordSize() {
+//     var KeywordSearch = getKeywordSearchCount()
+//     console.log(KeywordSearch);
+// }
+
+
+function renderKeyWord() {
+    var elKeyWord = document.querySelector('.search-words')
+
+    var strHTML =  `
+    <div class="funny" style="font-size:${getKeywordSearchCount()['funny']}px ;" onclick = "onSetFilterByWord('Funny')">Funny</div>
+    <div class="trump" style="font-size:${getKeywordSearchCount()['trump']}px ;" onclick="onSetFilterByWord('Trump')">Trump</div>
+    <div class="Baby" style="font-size:${getKeywordSearchCount()['baby']}px ;" onclick="onSetFilterByWord('Baby')">Baby</div>
+        `
+    elKeyWord.innerHTML = strHTML
+
+        
 }
