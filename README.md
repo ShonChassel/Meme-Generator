@@ -11,7 +11,7 @@ Meme is a Meme-Generator App.
 <br/>
 :link: Link to the live project: [Link](https://shonchassel.github.io/Appsus/#/)  
 <br/>
-<img src='assets/img/apsus.PNG'/>
+<img src='assets/img/meme-1'/>
 <br/>
 
 ## My Process
