@@ -9,7 +9,7 @@ Meme is a Meme-Generator App.
 ✅ The app is fully responsive and it adapts to any screen size.  
 ✅ The app was developed while considering the Web Content Accessibility Guidelines (WCAG).  
 <br/>
-:link: Link to the live project: [Link](https://shonchassel.github.io/Appsus/#/)  
+:link: Link to the live project: [Link](https://shonchassel.github.io/Meme-Generator/)  
 <br/>
 <img src='meme-1.PNG'/>
 <br/>
